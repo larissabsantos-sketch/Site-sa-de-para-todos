@@ -1,1 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#e7f5ff">
+<meta name="description" content="Encontre hospitais, UPAs e unidades de saúde perto de você.">
+<title>Saúde Humanitária | Cuidado perto de você</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#5db6e9;--blue2:#247eae;--deep:#174e70;--pale:#eaf7ff;--pale2:#d8efff;--bg:#f7fcff;--ink:#19394e;--muted:#668196;--line:#d7e9f4;--white:#fff;--green:#267b67;--shadow:0 14px 42px #2b71921a}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}button,input,select{font:inherit}button,a{-webkit-tap-highlight-color:transparent}a{color:inherit;text-decoration:none}.wrap{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:10;background:#ffffffed;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:16px;background:linear-gradient(145deg,#9cdbff,#55afe7);display:grid;place-items:center;color:white;font-size:27px;box-shadow:0 7px 16px #9ccfe955}.brand strong{font:800 19px Manrope,sans-serif;letter-spacing:-.5px}.brand strong span{color:var(--blue2)}.tag{background:var(--pale);border:1px solid var(--line);border-radius:99px;padding:8px 13px;color:var(--deep);font-size:12px;font-weight:700}
+.hero{padding:70px 0 100px;background:radial-gradient(circle at 82% 20%,#ffffffb8 0 8%,transparent 28%),linear-gradient(135deg,#eaf7ff,#d5edff 58%,#effaff);position:relative;overflow:hidden}.hero:after{content:"✚";position:absolute;right:9%;bottom:-90px;font-size:300px;color:#fff5;transform:rotate(-12deg);pointer-events:none}.hero-inner{position:relative;z-index:1;max-width:770px}.eyebrow{display:inline-block;background:#ffffffb8;border:1px solid white;border-radius:99px;padding:8px 14px;color:var(--deep);font-size:12px;font-weight:800;letter-spacing:.4px;margin-bottom:20px}h1{font:800 clamp(36px,6vw,62px)/1.08 Manrope,sans-serif;letter-spacing:-2px;color:var(--deep);margin-bottom:20px}h1 span{color:var(--blue2)}.hero p{font-size:17px;color:#4e7188;max-width:620px;line-height:1.8}
+.search-section{margin-top:-48px;position:relative;z-index:2}.search-card{background:white;border:1px solid var(--line);border-radius:26px;padding:30px;box-shadow:var(--shadow)}.search-card h2{font:800 23px Manrope,sans-serif;margin-bottom:6px}.search-card>p{color:var(--muted);font-size:14px;margin-bottom:20px}.form{display:flex;gap:12px}.field{flex:1;min-width:0}.field input{width:100%;height:58px;border:1px solid #cfe4f1;background:#fafdff;border-radius:14px;padding:0 17px;outline:none;color:var(--ink)}.field input:focus{border-color:var(--blue);box-shadow:0 0 0 4px #65b9ee25}.btn{min-height:54px;padding:0 20px;border:0;border-radius:14px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:800;cursor:pointer;transition:.18s}.btn:hover{transform:translateY(-2px)}.primary{background:var(--blue2);color:white;box-shadow:0 7px 15px #247eae24}.primary:hover{background:#1b6e9b}.soft{background:var(--pale);color:var(--deep);border:1px solid var(--line)}.actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:14px}.actions .btn{min-height:46px;font-size:13px}.privacy{font-size:12px;color:var(--muted);margin-top:16px}
+main{padding:58px 0 75px}.heading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:22px}.heading h2{font:800 clamp(24px,3vw,32px) Manrope,sans-serif;letter-spacing:-.8px}.heading p{color:var(--muted);font-size:14px;margin-top:5px}.count{font-size:13px;font-weight:800;color:var(--blue2);white-space:nowrap}.status{display:none;border-radius:13px;padding:13px 16px;margin-bottom:17px;font-size:14px}.status.show{display:block}.status.info{background:#eaf5ff;color:#285d80}.status.error{background:#fff0ef;color:#9a3e37}.status.ok{background:#e8f8f3;color:var(--green)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.card{background:white;border:1px solid var(--line);border-radius:22px;padding:23px;box-shadow:0 8px 26px #397da00c;display:flex;flex-direction:column;gap:14px;min-width:0}.cardtop{display:flex;gap:13px;align-items:flex-start}.hospital-icon{width:53px;height:53px;flex-shrink:0;display:grid;place-items:center;border-radius:17px;background:var(--pale);font-size:25px}.name{font:800 17px/1.4 Manrope,sans-serif;overflow-wrap:anywhere}.kind{font-size:13px;color:var(--muted);margin-top:5px}.distance{display:inline-flex;align-self:flex-start;background:#e9f8f4;color:#287660;border-radius:99px;padding:6px 11px;font-size:12px;font-weight:800}.address{color:var(--muted);font-size:13px;line-height:1.7}.note{background:#fff8e9;color:#775a2c;border-radius:12px;padding:12px;font-size:12px;line-height:1.6}.cardactions{display:flex;gap:10px;margin-top:auto}.cardactions .btn{flex:1;min-height:44px;padding:9px 10px;font-size:12px;text-align:center}.empty{grid-column:1/-1;text-align:center;background:white;border:1px dashed #c9e1ef;border-radius:22px;padding:48px 22px}.empty .emoji{font-size:46px;margin-bottom:12px}.empty h3{font:800 20px Manrope,sans-serif;margin-bottom:8px}.empty p{max-width:490px;margin:auto;color:var(--muted);font-size:14px}
+.info{margin-top:60px}.infogrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:22px}.infocard{background:white;border:1px solid var(--line);border-radius:20px;padding:23px}.infocard .emoji{font-size:29px;margin-bottom:12px}.infocard h3{font:800 16px Manrope,sans-serif;margin-bottom:8px}.infocard p{font-size:13px;color:var(--muted);line-height:1.8}.alert{display:flex;gap:16px;margin-top:42px;padding:22px;background:#fff8e9;border:1px solid #f2dfb9;border-radius:20px}.alert .emoji{font-size:28px}.alert h3{font:800 17px Manrope,sans-serif;color:#80561c;margin-bottom:5px}.alert p{font-size:13px;color:#765d3b;line-height:1.8}
+footer{background:#174e70;color:white;padding:30px 0}.foot{display:flex;justify-content:space-between;align-items:center;gap:20px}.foot strong{font:800 17px Manrope,sans-serif}.foot p{font-size:12px;color:#d7eefa;margin-top:5px}.foot a{font-size:12px;color:#e1f3ff;text-decoration:underline}button:focus-visible,a:focus-visible{outline:3px solid #f1c85b;outline-offset:3px}.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:760px){.hero{padding:52px 0 82px}.search-card{padding:22px}.form{flex-direction:column}.form .btn{width:100%}.grid,.infogrid{grid-template-columns:1fr}.heading{align-items:flex-start;flex-direction:column}.foot{align-items:flex-start;flex-direction:column}.tag{font-size:11px}.hero p{font-size:15px}}@media(max-width:420px){.brand strong{font-size:16px}.actions{flex-direction:column}.actions .btn{width:100%}.cardactions{flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="#" aria-label="Saúde Humanitária, início"><div class="logo" aria-hidden="true">✚</div><strong>Saúde <span>Humanitária</span></strong></a>
+  <span class="tag">💙 Cuidado para todos</span>
+</div></header>
 
+<section class="hero"><div class="wrap hero-inner">
+  <div class="eyebrow">✦ ACESSO À SAÚDE COM MAIS FACILIDADE</div>
+  <h1>Encontre cuidado<br><span>perto de você.</span></h1>
+  <p>Pesquise hospitais, UPAs e unidades de saúde por endereço ou use sua localização para encontrar opções próximas e planejar como chegar.</p>
+</div></section>
+
+<section class="wrap search-section" aria-label="Busca de unidades de saúde">
+  <div class="search-card">
+    <h2>Onde você precisa de atendimento?</h2>
+    <p>Digite uma cidade, bairro ou endereço no Brasil.</p>
+    <form class="form" id="searchForm">
+      <div class="field"><label class="sr" for="locationInput">Cidade, bairro ou endereço</label><input id="locationInput" type="text" placeholder="Ex.: Boa Viagem, Recife - PE" autocomplete="street-address" required></div>
+      <button class="btn primary" type="submit">🔎 Buscar unidades</button>
+    </form>
+    <div class="actions">
+      <button class="btn soft" id="locationButton" type="button">📍 Usar minha localização</button>
+      <button class="btn soft" id="clearButton" type="button">✕ Limpar busca</button>
+    </div>
+    <p class="privacy">🔒 A localização só será acessada com sua autorização. Este site não salva sua localização.</p>
+  </div>
+</section>
+
+<main class="wrap">
+  <section aria-labelledby="resultsTitle">
+    <div class="heading"><div><h2 id="resultsTitle">Unidades de saúde próximas</h2><p id="resultsSubtitle">Pesquise um endereço ou use sua localização para começar.</p></div><div class="count" id="resultsCount" aria-live="polite">Aguardando busca</div></div>
+    <div class="status" id="status" role="status" aria-live="polite"></div>
+    <div class="grid" id="results"><div class="empty"><div class="emoji">🏥</div><h3>Seu próximo atendimento começa aqui</h3><p>Digite um endereço ou permita o acesso à sua localização para encontrar hospitais e unidades de saúde próximas.</p></div></div>
+  </section>
+
+  <section class="info">
+    <div class="heading"><div><h2>Saúde acessível para todos</h2><p>Informações para ajudar você a encontrar atendimento.</p></div></div>
+    <div class="infogrid">
+      <article class="infocard"><div class="emoji">📍</div><h3>Encontre perto de você</h3><p>Pesquise unidades usando sua localização ou digitando um endereço em qualquer região do Brasil.</p></article>
+      <article class="infocard"><div class="emoji">💙</div><h3>Atendimento pelo SUS</h3><p>O SUS oferece atendimento público e gratuito. Confirme com a unidade se ela atende pelo sistema e quais serviços estão disponíveis.</p></article>
+      <article class="infocard"><div class="emoji">🗺️</div><h3>Planeje seu trajeto</h3><p>Abra a rota no mapa para consultar como chegar ao estabelecimento escolhido.</p></article>
+    </div>
+  </section>
+
+  <section class="alert" aria-labelledby="emergencyTitle">
+    <div class="emoji" aria-hidden="true">🚨</div><div><h3 id="emergencyTitle">Precisa de atendimento de emergência?</h3><p>Em uma urgência ou emergência médica no Brasil, ligue para o <strong>SAMU, no número 192</strong>. Este site é uma ferramenta de localização e não substitui os serviços de emergência.</p></div>
+  </section>
+</main>
+
+<footer><div class="wrap foot"><div><strong>✚ Saúde Humanitária</strong><p>Informação e cuidado para aproximar pessoas da saúde.</p><p>Dados cartográficos © OpenStreetMap contributors.</p></div><div><a href="https://www.gov.br/saude/pt-br" target="_blank" rel="noopener noreferrer">Ministério da Saúde</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">Créditos do mapa</a></div></div></footer>
+
+<script>
+"use strict";
+const CONFIG={radius:10000,maxResults:30,geocodingUrl:"https://nominatim.openstreetmap.org/search",overpassUrl:"https://overpass-api.de/api/interpreter"};
+const $=id=>document.getElementById(id);
+const form=$("searchForm"),input=$("locationInput"),locBtn=$("locationButton"),clearBtn=$("clearButton");
+const results=$("results"),count=$("resultsCount"),subtitle=$("resultsSubtitle"),statusBox=$("status");
+let searchSequence=0;
+
+function escapeHTML(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function status(message,type="info"){statusBox.textContent=message;statusBox.className=`status show ${type}`;}
+function clearStatus(){statusBox.textContent="";statusBox.className="status";}
+function loading(message){results.innerHTML=`<div class="empty"><div class="emoji">⏳</div><h3>Buscando unidades de saúde...</h3><p>${escapeHTML(message)}</p></div>`;count.textContent="Buscando…";}
+function distanceKm(a,b,c,d){const rad=x=>x*Math.PI/180,dl=rad(c-a),dn=rad(d-b),h=Math.sin(dl/2)**2+Math.cos(rad(a))*Math.cos(rad(c))*Math.sin(dn/2)**2;return 6371*2*Math.atan2(Math.sqrt(h),Math.sqrt(1-h));}
+function fmtDistance(km){return km<1?`${Math.round(km*1000)} m de distância`:`${km.toFixed(1).replace(".",",")} km de distância`;}
+async function geocode(address){
+  const url=new URL(CONFIG.geocodingUrl);url.searchParams.set("q",address);url.searchParams.set("format","jsonv2");url.searchParams.set("limit","1");url.searchParams.set("countrycodes","br");
+  const res=await fetch(url,{headers:{Accept:"application/json"}});if(!res.ok)throw Error("Não foi possível pesquisar o endereço agora.");
+  const data=await res.json();if(!data.length)throw Error("Não encontramos esse endereço. Tente informar uma cidade ou bairro mais específico.");
+  return{lat:Number(data[0].lat),lon:Number(data[0].lon),label:data[0].display_name};
+}
+function getPosition(){return new Promise((resolve,reject)=>{
+  if(!navigator.geolocation)return reject(Error("Seu navegador não oferece suporte à localização."));
+  navigator.geolocation.getCurrentPosition(p=>resolve({lat:p.coords.latitude,lon:p.coords.longitude}),e=>{
+    let m="Não foi possível obter sua localização.";if(e.code===1)m="Acesso à localização não autorizado. Você pode digitar seu endereço na busca.";if(e.code===3)m="A localização demorou para responder. Tente novamente.";
+    reject(Error(m));
+  },{enableHighAccuracy:true,timeout:15000,maximumAge:60000});
+});}
+async function getFacilities(lat,lon){
+  const r=CONFIG.radius;
+  const query=`[out:json][timeout:25];(node["amenity"~"^(hospital|clinic|doctors|health_post|social_facility)$"](around:${r},${lat},${lon});way["amenity"~"^(hospital|clinic|doctors|health_post|social_facility)$"](around:${r},${lat},${lon});relation["amenity"~"^(hospital|clinic|doctors|health_post|social_facility)$"](around:${r},${lat},${lon});node["healthcare"~"^(hospital|clinic|centre|doctor|health_post)$"](around:${r},${lat},${lon});way["healthcare"~"^(hospital|clinic|centre|doctor|health_post)$"](around:${r},${lat},${lon}););out center tags;`;
+  const res=await fetch(CONFIG.overpassUrl,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},body:"data="+encodeURIComponent(query)});
+  if(!res.ok)throw Error("O serviço de mapas está temporariamente indisponível. Tente novamente em alguns minutos.");
+  const data=await res.json();const seen=new Set();
+  return data.elements.map(el=>{
+    const tags=el.tags||{},p=el.center||el;
+    if(!Number.isFinite(p.lat)||!Number.isFinite(p.lon))return null;
+    const name=tags.name||tags["name:pt"]||tags.official_name||"Unidade de saúde sem nome cadastrado";
+    const key=(name.toLowerCase()+"|"+p.lat.toFixed(4)+"|"+p.lon.toFixed(4));if(seen.has(key))return null;seen.add(key);
+    const type=tags.amenity||tags.healthcare||"Unidade de saúde";
+    const label=({hospital:"Hospital",clinic:"Clínica",doctors:"Consultório médico",health_post:"Posto de saúde",centre:"Centro de saúde",doctor:"Consultório médico",social_facility:"Serviço de assistência"})[type]||"Unidade de saúde";
+    const addr=[tags["addr:street"],tags["addr:housenumber"],tags["addr:suburb"],tags["addr:city"]].filter(Boolean).join(", ");
+    return{name, type:label, lat:p.lat,lon:p.lon,address:addr||tags["addr:full"]||"Endereço não informado no mapa",distance:distanceKm(lat,lon,p.lat,p.lon),phone:tags.phone||tags["contact:phone"]||"",website:tags.website||tags["contact:website"]||""};
+  }).filter(Boolean).sort((a,b)=>a.distance-b.distance).slice(0,CONFIG.maxResults);
+}
+function cardHTML(item){
+  const map=`https://www.google.com/maps/dir/?api=1&destination=${item.lat},${item.lon}`;
+  const search=`https://www.google.com/maps/search/?api=1&query=${item.lat},${item.lon}`;
+  const phone=item.phone?`<a class="btn soft" href="tel:${escapeHTML(item.phone.replace(/[^\d+]/g,""))}">☎ Ligar</a>`:"";
+  return `<article class="card">
+    <div class="cardtop"><div class="hospital-icon" aria-hidden="true">🏥</div><div><h3 class="name">${escapeHTML(item.name)}</h3><div class="kind">${escapeHTML(item.type)}</div></div></div>
+    <span class="distance">📍 ${fmtDistance(item.distance)}</span>
+    <p class="address">⌖ ${escapeHTML(item.address)}</p>
+    <div class="note">ℹ️ <strong>Confirme antes de ir:</strong> os dados do mapa não confirmam atendimento pelo SUS, gratuidade, horário de funcionamento ou disponibilidade de serviços.</div>
+    <div class="cardactions"><a class="btn primary" href="${map}" target="_blank" rel="noopener noreferrer">🗺️ Como chegar</a><a class="btn soft" href="${search}" target="_blank" rel="noopener noreferrer">Ver no mapa</a>${phone}</div>
+  </article>`;
+}
+function showFacilities(items,label){
+  if(!items.length){results.innerHTML=`<div class="empty"><div class="emoji">🔎</div><h3>Nenhuma unidade encontrada por perto</h3><p>Não encontramos unidades cadastradas em um raio de 10 km. Tente outro endereço. Isso não significa que não existam serviços na região.</p></div>`;count.textContent="0 unidades";return;}
+  results.innerHTML=items.map(cardHTML).join("");count.textContent=`${items.length} ${items.length===1?"unidade encontrada":"unidades encontradas"}`;subtitle.textContent=`Resultados próximos de: ${label}`;
+}
+async function searchAt(coords,label,id){
+  if(id!==searchSequence)return;currentPosition=coords;loading("Consultando dados públicos de mapas em um raio de 10 km.");
+  try{const items=await getFacilities(coords.lat,coords.lon);if(id!==searchSequence)return;showFacilities(items,label);status("Busca concluída. Confira os dados e confirme o atendimento diretamente com a unidade.","ok");}
+  catch(err){if(id!==searchSequence)return;results.innerHTML=`<div class="empty"><div class="emoji">🫧</div><h3>Não conseguimos carregar os resultados</h3><p>${escapeHTML(err.message||"Tente novamente.")}</p></div>`;count.textContent="Busca indisponível";status(err.message||"Tente novamente mais tarde.","error");}
+}
+form.addEventListener("submit",async e=>{
+  e.preventDefault();const address=input.value.trim();if(!address){input.focus();return;}
+  const id=++searchSequence;clearStatus();loading("Localizando o endereço informado…");locBtn.disabled=true;
+  try{const coords=await geocode(address);if(id!==searchSequence)return;await searchAt(coords,coords.label||address,id);}
+  catch(err){if(id!==searchSequence)return;results.innerHTML=`<div class="empty"><div class="emoji">📍</div><h3>Não encontramos esse local</h3><p>${escapeHTML(err.message||"Confira o endereço e tente novamente.")}</p></div>`;count.textContent="";status(err.message||"Confira o endereço e tente novamente.","error");}
+  finally{locBtn.disabled=false;}
+});
+locBtn.addEventListener("click",async()=>{
+  const id=++searchSequence;clearStatus();loading("Aguardando autorização do navegador para acessar sua localização…");locBtn.disabled=true;
+  try{const coords=await getPosition();if(id!==searchSequence)return;input.value="Minha localização atual";await searchAt(coords,"sua localização atual",id);}
+  catch(err){if(id!==searchSequence)return;results.innerHTML=`<div class="empty"><div class="emoji">📍</div><h3>Não foi possível acessar sua localização</h3><p>${escapeHTML(err.message)}</p></div>`;count.textContent="";status(err.message,"error");}
+  finally{locBtn.disabled=false;}
+});
+clearBtn.addEventListener("click",()=>{
+  ++searchSequence;input.value="";currentPosition=null;clearStatus();count.textContent="Aguardando busca";subtitle.textContent="Pesquise um endereço ou use sua localização para começar.";
+  results.innerHTML='<div class="empty"><div class="emoji">🏥</div><h3>Seu próximo atendimento começa aqui</h3><p>Digite um endereço ou permita o acesso à sua localização para encontrar ho
